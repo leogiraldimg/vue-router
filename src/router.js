@@ -14,6 +14,8 @@ const router = createRouter({
     { path: "/notes", component: Notes },
     { path: "/:pathMatch(.*)", component: NotFound },
   ],
+  linkActiveClass: "active",
+  linkExactActiveClass: "active",
 });
 
 export default router;

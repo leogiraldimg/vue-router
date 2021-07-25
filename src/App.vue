@@ -25,27 +25,26 @@
             <li class="nav-item">
               <router-link
                 to="/dashboard"
-                class="nav-link active"
+                class="nav-link"
                 aria-current="page"
+                v-slot="{ isActive, navigate }"
               >
-                Dashboard
+                <button
+                  @click="navigate"
+                  class="nav-link bg-danger"
+                  :class="isActive ? 'active' : ' '"
+                >
+                  Dashboard
+                </button>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link
-                to="/notes"
-                class="nav-link active"
-                aria-current="page"
-              >
+              <router-link to="/notes" class="nav-link" aria-current="page">
                 Notes
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link
-                to="/tasks"
-                class="nav-link active"
-                aria-current="page"
-              >
+              <router-link to="/tasks" class="nav-link" aria-current="page">
                 Tasks
               </router-link>
             </li>
