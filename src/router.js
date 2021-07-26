@@ -2,8 +2,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import Dashboard from "@/components/Dashboard.vue";
 import Tasks from "@/components/todos/TodoItems.vue";
-import Notes from "@/components/notes/Notes.vue";
 import NotFound from "@/components/NotFound.vue";
+import NotesView from "@/views/NotesView.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -11,7 +11,7 @@ const router = createRouter({
     { path: "/", component: Dashboard },
     { path: "/dashboard", component: Dashboard },
     { path: "/tasks", component: Tasks },
-    { path: "/notes", component: Notes },
+    { path: "/notes", component: NotesView },
     { path: "/:pathMatch(.*)", component: NotFound },
   ],
   linkActiveClass: "active",
