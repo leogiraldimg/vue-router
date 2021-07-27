@@ -4,7 +4,14 @@
       <Labels />
     </div>
     <div class="col-10">
-      <Notes />
+      <div class="row g-0">
+        <div class="col">
+          <Notes />
+        </div>
+        <div class="col child-outlet">
+          <router-view></router-view>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -20,3 +27,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.child-outlet:empty {
+  flex: unset;
+}
+</style>

@@ -18,9 +18,9 @@
         <i class="fa fa-list"></i>
       </button>
 
-      <button @click="createNote" type="button" class="float-end btn btn-link">
+      <router-link to="/notes/new" class="float-end btn btn-link">
         <i class="fa fa-plus"></i>
-      </button>
+      </router-link>
     </div>
     <div class="col-12">
       <div
