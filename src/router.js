@@ -17,7 +17,13 @@ const router = createRouter({
       component: NotesView,
       children: [
         { path: "new", component: NoteAddEdit },
-        { path: "edit/:id([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?", component: NoteAddEdit },
+        {
+          path:
+            "edit/:noteId([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?",
+          component: NoteAddEdit,
+          // props: true,
+          props: (route) => ({ id: route.params.noteId }),
+        },
       ],
     },
     { path: "/:pathMatch(.*)", component: NotFound },

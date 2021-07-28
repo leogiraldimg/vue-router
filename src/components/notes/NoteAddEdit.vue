@@ -71,7 +71,10 @@ export default {
   name: "NoteAddEdit",
   components: {},
   props: {
-    value: Object,
+    id: {
+      type: String,
+      default: "",
+    }
   },
   data() {
     return {
@@ -80,7 +83,7 @@ export default {
     };
   },
   watch: {
-    $route() {
+    id() {
       this.initializeNote();
     }
   },
@@ -90,7 +93,7 @@ export default {
   },
   methods: {
     initializeNote() {
-      let noteId = this.$route.params.id;
+      let noteId = this.id;
 
       if (noteId) {
         let existingNote = this.$store.getters.allNotes.find(
