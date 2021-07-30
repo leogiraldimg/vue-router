@@ -4,12 +4,19 @@ import Tasks from "./components/todos/TodoItems.vue";
 import Notes from "./views/NotesView.vue";
 import NotFound from "./components/NotFound.vue";
 import TaskAddEdit from "./components/notes/NoteAddEdit.vue";
+import { store } from "./store";
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes: [
-    { path: "/", component: Dashboard },
-    { path: "/dashboard", component: Dashboard },
+    {
+      path: "/",
+      redirect: (to) => {
+        console.log("Redirect from ", to);
+        return { path: store.getters.startScreen };
+      },
+    },
+    { path: "/dashboard", component: Dashboard, alias: ["/home", "/mydashboard"] },
     { path: "/tasks", component: Tasks },
     {
       path: "/notes",
