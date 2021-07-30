@@ -22,11 +22,12 @@ const router = createRouter({
       path: "/notes",
       component: Notes,
       children: [
-        { path: "new", component: TaskAddEdit },
+        { path: "new", component: TaskAddEdit, name: "createnote" },
         {
           path:
             "edit/:id([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?",
           component: TaskAddEdit,
+          name: "editnote",
           // props:true,
           // props:{id:''},
           props: (route) => ({ id: route.params.id }),
