@@ -28,7 +28,8 @@
             <small></small>
             <a
               href="javascript:;"
-              class="text-danger float-end" style="font-size:10px"
+              class="text-danger float-end"
+              style="font-size:10px"
               @click.stop="deleteLabel(label.id)"
               ><i class="fa fa-trash"></i
             ></a>

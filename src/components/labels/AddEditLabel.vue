@@ -21,7 +21,9 @@
           <button type="submit" class="btn btn-sm btn-primary m-1">
             {{ label.id ? "Update" : "Create" }}
           </button>
-          <button class="btn btn-sm btn-danger" @click="$emit('close')">Cancel</button>
+          <button class="btn btn-sm btn-danger" @click="$emit('close')">
+            Cancel
+          </button>
         </div>
       </form>
     </div>
@@ -59,5 +61,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

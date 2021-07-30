@@ -4,7 +4,7 @@
       <Labels />
     </div>
     <div class="col-10">
-      <div class="row g-0">
+      <div class="row g-0  justify-content-md-center">
         <div class="col">
           <Notes />
         </div>
@@ -15,11 +15,9 @@
     </div>
   </div>
 </template>
-
 <script>
 import Notes from "../components/notes/Notes.vue";
-import Labels from "../components/labels/LabelList.vue";
-
+import Labels from "../components/labels/LabelList";
 export default {
   components: {
     Notes,

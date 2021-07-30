@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="card"
-  >
+  <div class="card">
     <img
       class="card-img-top"
       src="https://i.picsum.photos/id/668/1200/300.jpg?hmac=h7jX5zGII1WkHCcilt8o7z0ABBZepGUpMU8sWqGBG-o"
@@ -9,10 +7,12 @@
     />
 
     <div class="card-body">
-      <h5 class="card-title">{{ value.title }} </h5>
-      <h6 class="card-subtitle mb-2 text-muted">{{ value.createdOn }}</h6> 
+      <h5 class="card-title">{{ value.title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ value.createdOn }}</h6>
       <p class="card-text">{{ value.note }}</p>
-      <span v-if="!value.done" class="badge badge-pill badge-success bg-danger">Unfinished</span>
+      <span v-if="!value.done" class="badge badge-pill badge-success bg-danger"
+        >Unfinished</span
+      >
       <span v-else class="badge badge-pill badge-success bg-success">Done</span>
       <a
         href="javascript:;"
@@ -34,5 +34,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>
+<style scoped></style>

@@ -23,10 +23,7 @@
       </router-link>
     </div>
     <div class="col-12">
-      <div
-        v-if="displayMode == displayModes.card"
-        class="row row-cols-1 row-cols-md-4 g-4 m-1"
-      >
+      <div v-if="displayMode == displayModes.card" class="row g-0">
         <div class="col" :key="todo.id" v-for="todo in $store.getters.allNotes">
           <router-link
             :to="'/notes/edit/' + todo.id"
@@ -52,7 +49,7 @@
           v-slot="{ navigate }"
         >
           <NoteItemList
-            @click="navigate"
+            @click="navigate(todo.id)"
             @delete="deleteNote(todo.id)"
             class="m-2"
             :value="todo"
@@ -66,7 +63,6 @@
 <script>
 import NoteItemCard from "./NoteItemCart.vue";
 import NoteItemList from "./NoteItemList.vue";
-
 export default {
   name: "Notes",
   components: {
@@ -88,4 +84,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.note-card {
+  max-width: 200px;
+}
+</style>

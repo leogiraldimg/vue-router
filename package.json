@@ -1,5 +1,5 @@
 {
-  "name": "vue-router-demo",
+  "name": "vue-router-course",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,7 +15,7 @@
     "jquery": "^3.6.0",
     "vue": "^3.0.0",
     "vue-html-editor": "^0.2.1",
-    "vue-router": "^4.0.10",
+    "vue-router": "^4.0.5",
     "vue-summernote": "^1.0.3",
     "vuex": "^4.0.0",
     "vuex-persist": "^3.1.3"

@@ -15,11 +15,15 @@ function uuidv4() {
 export const store = createStore({
   plugins: [vuexPersist.plugin],
   state: {
+    startScreen: "",
     tasks: [],
     notes: [],
     labels: [],
   },
   getters: {
+    startScreen(state) {
+      return state.startScreen;
+    },
     allNotes(state) {
       return state.notes;
     },
@@ -37,6 +41,9 @@ export const store = createStore({
     },
   },
   mutations: {
+    startScreen(state, value) {
+      state.startScreen = value;
+    },
     saveLabel(state, label) {
       if (label.id) {
         let existingLabelIndex = state.labels.findIndex(

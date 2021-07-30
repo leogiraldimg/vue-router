@@ -1,5 +1,6 @@
 <template>
   <div class="card">
+    <div></div>
     <img
       class="card-img-top"
       src="https://i.picsum.photos/id/20/1200/300.jpg?hmac=8rrSN6gcVsYYzYJs87AlbxZVnO0M38r6eD9kKJq1P3Q"
@@ -40,8 +41,9 @@
               v-for="label in $store.getters.allLabels"
               :key="label.id"
               :value="label.id"
-              >{{ label.title }}</option
             >
+              {{ label.title }}
+            </option>
           </select>
         </div>
         <div class="form-check">
@@ -55,7 +57,7 @@
         </div>
         <hr />
         <div class="float-end">
-          <button type="submit" class="btn btn-primary m-1 ">
+          <button type="submit" class="btn btn-primary m-1">
             {{ note.id ? "Update" : "Create" }}
           </button>
           <button class="btn btn-danger" @click="$emit('close')">Cancel</button>
@@ -73,8 +75,8 @@ export default {
   props: {
     id: {
       type: String,
-      default: "",
-    }
+      default: null,
+    },
   },
   data() {
     return {
@@ -82,24 +84,23 @@ export default {
       note: null,
     };
   },
+  mounted() {},
   watch: {
     id() {
       this.initializeNote();
-    }
+    },
   },
-  mounted() {},
   created() {
     this.initializeNote();
   },
   methods: {
     initializeNote() {
       let noteId = this.id;
-
       if (noteId) {
         let existingNote = this.$store.getters.allNotes.find(
           (z) => z.id == noteId
         );
-        this.note = existingNote;
+        this.note = { ...existingNote }; //copy existing note to remove vue change tracker
       } else {
         this.note = {
           id: null,
@@ -111,17 +112,14 @@ export default {
         };
       }
 
-      this.labelIds =
-        (this.note.labels && this.note.labels.map((z) => z.id)) || [];
+      this.labelIds = this.note.labels && this.note.labels.map((z) => z.id);
     },
     onSubmit(event) {
       event.preventDefault();
-
-      console.log("note", this.note);
       this.note.labels = this.$store.getters.allLabels.filter((z) =>
         this.labelIds.includes(z.id)
       );
-      this.$store.commit("saveNote", this.note);
+      this.$store.commit("saveNote", { ...this.note }); // copy before saving to remove vue change tracker
       this.$emit("close");
     },
   },

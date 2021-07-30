@@ -1,6 +1,8 @@
 <template>
   <div class="container-fluid p-0">
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <nav
+      class="navbar navbar-expand-md navbar-dark bg-dark sticky-top justify-content-between"
+    >
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
           <img
@@ -26,30 +28,30 @@
               <router-link
                 to="/dashboard"
                 class="nav-link"
-                aria-current="page"
-                v-slot="{ isActive, navigate }"
+                custom
+                v-slot="{ isActive, href, navigate }"
               >
-                <button
+                <a
+                  :href="href"
                   @click="navigate"
                   class="nav-link bg-danger"
                   :class="isActive ? 'active' : ' '"
                 >
                   Dashboard
-                </button>
+                </a>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/notes" class="nav-link" aria-current="page">
-                Notes
-              </router-link>
+              <router-link to="/notes" class="nav-link ">Notes</router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/tasks" class="nav-link" aria-current="page">
-                Tasks
-              </router-link>
+              <router-link to="/tasks" class="nav-link ">Tasks</router-link>
             </li>
           </ul>
         </div>
+        <form class="form-inline">
+          <StartScreenPicker />
+        </form>
       </div>
     </nav>
     <div class="container-fluid">
@@ -59,12 +61,15 @@
 </template>
 
 <script>
+import StartScreenPicker from "./components/StartScreenPicker.vue";
 export default {
   name: "App",
   data() {
     return {};
   },
-  components: {},
+  components: {
+    StartScreenPicker,
+  },
 };
 </script>
 
