@@ -5,6 +5,7 @@ import Notes from "./views/NotesView.vue";
 import NotFound from "./components/NotFound.vue";
 import TaskAddEdit from "./components/notes/NoteAddEdit.vue";
 import { store } from "./store";
+import NavbarComponent from "./components/navigation/Navbar.vue";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -16,11 +17,24 @@ const router = createRouter({
         return { path: store.getters.startScreen };
       },
     },
-    { path: "/dashboard", component: Dashboard, alias: ["/home", "/mydashboard"] },
-    { path: "/tasks", component: Tasks },
+    {
+      path: "/dashboard",
+      component: Dashboard,
+      alias: ["/home", "/mydashboard"],
+    },
+    {
+      path: "/tasks",
+      components: {
+        default: Tasks,
+        Navbar: NavbarComponent,
+      },
+    },
     {
       path: "/notes",
-      component: Notes,
+      components: {
+        default: Notes,
+        Navbar: NavbarComponent,
+      },
       children: [
         { path: "new", component: TaskAddEdit, name: "createnote" },
         {
