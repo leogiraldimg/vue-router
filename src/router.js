@@ -3,7 +3,7 @@ import Dashboard from "./components/Dashboard.vue";
 import Tasks from "./components/todos/TodoItems.vue";
 import Notes from "./views/NotesView.vue";
 import NotFound from "./components/NotFound.vue";
-import TaskAddEdit from "./components/notes/NoteAddEdit.vue";
+import NoteAddEdit from "@/views/AddEditNoteView";
 import { store } from "./store";
 import NavbarComponent from "./components/navigation/Navbar.vue";
 
@@ -36,11 +36,11 @@ const router = createRouter({
         Navbar: NavbarComponent,
       },
       children: [
-        { path: "new", component: TaskAddEdit, name: "createnote" },
+        { path: "new", component: NoteAddEdit, name: "createnote" },
         {
           path:
             "edit/:id([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?",
-          component: TaskAddEdit,
+          component: NoteAddEdit,
           name: "editnote",
           // props:true,
           // props:{id:''},
