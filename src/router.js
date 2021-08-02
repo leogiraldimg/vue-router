@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "./components/Dashboard.vue";
 import Tasks from "./components/todos/TodoItems.vue";
 import Notes from "./views/NotesView.vue";
@@ -8,7 +8,7 @@ import { store } from "./store";
 import NavbarComponent from "./components/navigation/Navbar.vue";
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     {
       path: "/",
