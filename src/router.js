@@ -3,7 +3,7 @@ import Dashboard from "./components/Dashboard.vue";
 import Tasks from "./components/todos/TodoItems.vue";
 import Notes from "./views/NotesView.vue";
 import NotFound from "./components/NotFound.vue";
-import NoteAddEdit from "@/views/AddEditNoteView";
+import NoteAddEdit from "./views/AddEditNoteView.vue";
 import { store } from "./store";
 import NavbarComponent from "./components/navigation/Navbar.vue";
 
@@ -17,13 +17,10 @@ const router = createRouter({
         return { path: store.getters.startScreen };
       },
     },
-    {
-      path: "/dashboard",
-      component: Dashboard,
-      alias: ["/home", "/mydashboard"],
-    },
+    { path: "/dashboard", name: "dashboard", component: Dashboard },
     {
       path: "/tasks",
+      name: "tasks",
       components: {
         default: Tasks,
         Navbar: NavbarComponent,
@@ -39,26 +36,20 @@ const router = createRouter({
       children: [
         {
           path: "new",
+          name: "newnote",
           component: NoteAddEdit,
-          name: "createnote",
           meta: {
-            onClose: () => {
-              router.push({ name: "notes" });
-            },
+            onClose: () => router.push({ name: "notes" }),
           },
         },
         {
+          name: "editnote",
           meta: {
-            onClose: () => {
-              router.push({ name: "notes" });
-            },
+            onClose: () => router.push({ name: "notes" }),
           },
           path:
             "edit/:id([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?",
           component: NoteAddEdit,
-          name: "editnote",
-          // props:true,
-          // props:{id:''},
           props: (route) => ({ id: route.params.id }),
         },
       ],

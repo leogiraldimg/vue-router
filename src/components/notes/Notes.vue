@@ -18,26 +18,20 @@
         <i class="fa fa-list"></i>
       </button>
 
-      <button @click="createNote" class="float-end btn btn-link">
+      <router-link :to="{ name: 'newnote' }" class="float-end btn btn-link">
         <i class="fa fa-plus"></i>
-      </button>
+      </router-link>
     </div>
     <div class="col-12">
       <div v-if="displayMode == displayModes.card" class="row g-0">
         <div class="col" :key="todo.id" v-for="todo in $store.getters.allNotes">
-          <router-link
-            :to="{ name: 'editnote', params: { id: todo.id } }"
-            custom
-            v-slot="{ navigate }"
+          <NoteItemCard
+            @delete="deleteNote(todo.id)"
+            @click="editNote(todo.id)"
+            class="m-1 note-card"
+            :value="todo"
           >
-            <NoteItemCard
-              @delete="deleteNote(todo.id)"
-              @click="navigate"
-              class="m-1 note-card"
-              :value="todo"
-            >
-            </NoteItemCard>
-          </router-link>
+          </NoteItemCard>
         </div>
       </div>
       <div v-else class="list-group m-1 p-3">
@@ -64,7 +58,6 @@
 import NoteItemCard from "./NoteItemCart.vue";
 import NoteItemList from "./NoteItemList.vue";
 import router from "../../router";
-
 export default {
   name: "Notes",
   components: {
@@ -79,17 +72,11 @@ export default {
   },
   props: {},
   methods: {
+    editNote(id) {
+      router.push({ name: "editnote", params: { id: id } });
+    },
     deleteNote(id) {
       this.$store.commit("deleteNote", id);
-    },
-    createNote() {
-      const noteCount = this.$store.getters.allNotes.length;
-
-      if (noteCount >= 5) {
-        alert("You cannot create more than 5 notes on the free tier");
-      } else {
-        router.push({ name: "createnote" });
-      }
     },
   },
 };

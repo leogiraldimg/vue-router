@@ -1,10 +1,11 @@
 <template>
-  <NoteAddEdit v-bind="$props" @close="navigateBack" />
+  <div>
+    <NoteAddEdit v-bind="$props" @close="navigateBack" />
+  </div>
 </template>
 <script>
 import router from "../router";
 import NoteAddEdit from "../components/notes/NoteAddEdit.vue";
-
 export default {
   components: {
     NoteAddEdit,
@@ -17,9 +18,9 @@ export default {
   },
   methods: {
     navigateBack() {
-      let currentRoute = router.currentRoute.value.meta;
-
-      currentRoute.onClose();
+      console.log("curentroute", router.currentRoute.value);
+      router.currentRoute.value.meta.onClose();
+      // router.push({name:router.currentRoute.value.meta.onCloseRedirect})
     },
   },
 };

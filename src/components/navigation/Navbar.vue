@@ -61,6 +61,6 @@ import StartScreenPicker from "../StartScreenPicker.vue";
 export default {
   components: {
     StartScreenPicker,
-  }
-}
+  },
+};
 </script>
