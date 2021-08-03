@@ -31,13 +31,28 @@ const router = createRouter({
     },
     {
       path: "/notes",
+      name: "notes",
       components: {
         default: Notes,
         Navbar: NavbarComponent,
       },
       children: [
-        { path: "new", component: NoteAddEdit, name: "createnote" },
         {
+          path: "new",
+          component: NoteAddEdit,
+          name: "createnote",
+          meta: {
+            onClose: () => {
+              router.push({ name: "notes" });
+            },
+          },
+        },
+        {
+          meta: {
+            onClose: () => {
+              router.push({ name: "notes" });
+            },
+          },
           path:
             "edit/:id([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12})?",
           component: NoteAddEdit,

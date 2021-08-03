@@ -17,7 +17,9 @@ export default {
   },
   methods: {
     navigateBack() {
-      router.go(-1);
+      let currentRoute = router.currentRoute.value.meta;
+
+      currentRoute.onClose();
     },
   },
 };
