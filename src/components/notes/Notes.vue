@@ -18,9 +18,9 @@
         <i class="fa fa-list"></i>
       </button>
 
-      <router-link :to="{ name: 'createnote' }" class="float-end btn btn-link">
+      <button @click="createNote" class="float-end btn btn-link">
         <i class="fa fa-plus"></i>
-      </router-link>
+      </button>
     </div>
     <div class="col-12">
       <div v-if="displayMode == displayModes.card" class="row g-0">
@@ -63,6 +63,8 @@
 <script>
 import NoteItemCard from "./NoteItemCart.vue";
 import NoteItemList from "./NoteItemList.vue";
+import router from "../../router";
+
 export default {
   name: "Notes",
   components: {
@@ -79,6 +81,15 @@ export default {
   methods: {
     deleteNote(id) {
       this.$store.commit("deleteNote", id);
+    },
+    createNote() {
+      const noteCount = this.$store.getters.allNotes.length;
+
+      if (noteCount >= 5) {
+        alert("You cannot create more than 5 notes on the free tier");
+      } else {
+        router.push({ name: "createnote" });
+      }
     },
   },
 };
