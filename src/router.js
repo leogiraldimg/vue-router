@@ -63,6 +63,16 @@ const router = createRouter({
   ],
   linkActiveClass: "active",
   linkExactActiveClass: "active",
+  scrollBehavior(to, from, savedPosition) {
+    console.log(to);
+    console.log(from);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(savedPosition || { top: 0, left: 0 });
+      }, 1000);
+    });
+  },
 });
 
 router.afterEach((to, from) => {
