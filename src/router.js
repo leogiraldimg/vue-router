@@ -17,7 +17,12 @@ const router = createRouter({
         return { path: store.getters.startScreen };
       },
     },
-    { path: "/dashboard", name: "dashboard", component: Dashboard },
+    {
+      path: "/dashboard",
+      name: "dashboard",
+      component: Dashboard,
+      meta: { transition: "zoom-down" },
+    },
     {
       path: "/tasks",
       name: "tasks",
