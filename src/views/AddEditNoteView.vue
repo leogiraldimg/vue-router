@@ -1,6 +1,6 @@
 <template>
   <div>
-    <NoteAddEdit v-bind="$props" @close="navigateBack" />
+    <NoteAddEdit ref="noteeditor" v-bind="$props" @close="navigateBack" />
   </div>
 </template>
 <script>
@@ -15,6 +15,21 @@ export default {
       type: String,
       default: "",
     },
+  },
+  beforeRouteEnter() {
+    console.log("Before notes edit entered (In-component)");
+  },
+  beforeRouteLeave() {
+    console.log("Before notes edit leave (In-Component)");
+    if (this.$refs.noteeditor.hasChanges()) {
+      const discardChanges = window.confirm(
+        "Do you really want to leave? You have some changes that you havent saved yet."
+      );
+      if (!discardChanges) return false;
+    }
+  },
+  beforeRouteUpdate() {
+    console.log("Before Notes edit updated (In-Component)");
   },
   methods: {
     navigateBack() {

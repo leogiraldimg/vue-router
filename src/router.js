@@ -21,7 +21,7 @@ const router = createRouter({
       path: "/dashboard",
       name: "dashboard",
       component: Dashboard,
-      meta: { transition: "zoom-down" },
+      meta: { transition: "zoom-down", title: "Dashboard" },
     },
     {
       path: "/tasks",
@@ -30,6 +30,9 @@ const router = createRouter({
         default: Tasks,
         Navbar: NavbarComponent,
       },
+      meta: {
+        title: "Tasks",
+      },
     },
     {
       path: "/notes",
@@ -37,6 +40,10 @@ const router = createRouter({
       components: {
         default: Notes,
         Navbar: NavbarComponent,
+      },
+      meta: {
+        title: "Notes",
+        requiresMic: true,
       },
       children: [
         {
@@ -48,6 +55,9 @@ const router = createRouter({
           },
         },
         {
+          beforeEnter: () => {
+            console.log("Before Note Edit Enter (Per-Route)");
+          },
           name: "editnote",
           meta: {
             onClose: () => router.push({ name: "notes" }),
@@ -75,8 +85,25 @@ const router = createRouter({
   },
 });
 
-router.afterEach((to, from) => {
-  console.log(from);
+router.beforeEach(() => {
+  console.log("Before Each (Global)");
+});
+
+router.beforeResolve(async (to) => {
+  console.log("before Resolve (Global)");
+  if (to.meta.requiresMic) {
+    try {
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (err) {
+      alert("Cannot proceed without allowing acces to mic. Enable access and reload the page.");
+      return false;
+    }
+  }
+});
+
+router.afterEach((to) => {
+  console.log("After Each (Global)");
+  document.title = "Globomantics: " + to.meta.title;
   to.meta.transition = to.matched.length === 1 ? "bounce-right" : "bounce-left";
 });
 
