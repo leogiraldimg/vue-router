@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
+
 import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "./components/Dashboard.vue";
 import Tasks from "./components/todos/TodoItems.vue";
@@ -6,6 +9,7 @@ import NotFound from "./components/NotFound.vue";
 import NoteAddEdit from "./views/AddEditNoteView.vue";
 import { store } from "./store";
 import NavbarComponent from "./components/navigation/Navbar.vue";
+import Login from "./components/auth/Login.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,42 +17,39 @@ const router = createRouter({
     {
       path: "/",
       redirect: (to) => {
-        console.log("Redirect from ", to);
-        return { path: store.getters.startScreen };
+        return { path: store.getters.startScreen || "dashboard" };
       },
     },
+    { path: "/dashboard", name: "dashboard", component: Dashboard },
+    { path: "/login", name: "login", component: Login },
     {
-      path: "/dashboard",
-      name: "dashboard",
-      component: Dashboard,
-      meta: { transition: "zoom-down", title: "Dashboard" },
-    },
-    {
+      meta: {
+        title: "Globomantics: Notes",
+        transition: "bounce-right",
+      },
       path: "/tasks",
       name: "tasks",
       components: {
         default: Tasks,
         Navbar: NavbarComponent,
       },
-      meta: {
-        title: "Tasks",
-      },
     },
     {
       path: "/notes",
       name: "notes",
+      meta: {
+        title: "Globomantics: Notes",
+        transition: "bounce-right",
+      },
       components: {
         default: Notes,
         Navbar: NavbarComponent,
-      },
-      meta: {
-        title: "Notes",
-        requiresMic: true,
       },
       children: [
         {
           path: "new",
           name: "newnote",
+
           component: NoteAddEdit,
           meta: {
             onClose: () => router.push({ name: "notes" }),
@@ -74,37 +75,34 @@ const router = createRouter({
   linkActiveClass: "active",
   linkExactActiveClass: "active",
   scrollBehavior(to, from, savedPosition) {
-    console.log(to);
-    console.log(from);
-
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(savedPosition || { top: 0, left: 0 });
+        resolve(savedPosition || { left: 0, top: 0 });
       }, 1000);
     });
   },
 });
-
-router.beforeEach(() => {
-  console.log("Before Each (Global)");
+router.beforeEach((to, from) => {
+  console.log("Before Each(Global)");
 });
-
-router.beforeResolve(async (to) => {
-  console.log("before Resolve (Global)");
+router.beforeResolve(async (to, from) => {
+  console.log("Before Resolve (Global)");
+  //ask for microphone:
   if (to.meta.requiresMic) {
     try {
       await navigator.mediaDevices.getUserMedia({ audio: true });
     } catch (err) {
-      alert("Cannot proceed without allowing acces to mic. Enable access and reload the page.");
+      alert(
+        "Cannot proceed without allowing access to mic. Enable access and reload the page"
+      );
       return false;
     }
   }
 });
-
-router.afterEach((to) => {
+router.afterEach((to, from) => {
   console.log("After Each (Global)");
-  document.title = "Globomantics: " + to.meta.title;
-  to.meta.transition = to.matched.length === 1 ? "bounce-right" : "bounce-left";
+  document.title = to.meta.title || "Globomantics";
+  to.meta.transition = to.matched.length == 1 ? "bounce-right" : "bounce-left";
 });
 
 export default router;

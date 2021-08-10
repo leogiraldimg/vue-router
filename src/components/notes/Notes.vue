@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       displayModes: { card: "cards", list: "list" },
-      displayMode: "cards",
+      displayMode: "list",
     };
   },
   props: {},

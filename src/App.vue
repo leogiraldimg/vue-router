@@ -4,7 +4,7 @@
 
     <div class="container-fluid">
       <router-view v-slot="{ Component, route }">
-        <AnimatedTransition :name="route.meta.transition || 'bounce-right'">
+        <AnimatedTransition mode="out-in" :name="route.meta.transition">
           <component :is="Component" />
         </AnimatedTransition>
       </router-view>
@@ -14,7 +14,6 @@
 
 <script>
 import AnimatedTransition from "./components/transitions/AnimatedTransition.vue";
-
 export default {
   name: "App",
   data() {
