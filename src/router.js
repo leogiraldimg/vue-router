@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-import { createRouter, createWebHistory } from "vue-router";
-import Dashboard from "./components/Dashboard.vue";
-import Tasks from "./components/todos/TodoItems.vue";
-import Notes from "./views/NotesView.vue";
-import NotFound from "./components/NotFound.vue";
-import NoteAddEdit from "./views/AddEditNoteView.vue";
 import { store } from "./store";
-import NavbarComponent from "./components/navigation/Navbar.vue";
-import Login from "./components/auth/Login.vue";
+import { createRouter, createWebHistory } from "vue-router";
+const Dashboard = () => import ("./components/Dashboard.vue");
+const Tasks = import ("./components/todos/TodoItems.vue");
+const Notes = import ("./views/NotesView.vue");
+const NotFound = import ("./components/NotFound.vue");
+const NoteAddEdit = import ("./views/AddEditNoteView.vue");
+const NavbarComponent = import ("./components/navigation/Navbar.vue");
+const Login = import ("./components/auth/Login.vue");
 
 const router = createRouter({
   history: createWebHistory(),
