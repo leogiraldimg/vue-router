@@ -40,6 +40,7 @@ const router = createRouter({
       meta: {
         title: "Globomantics: Notes",
         transition: "bounce-right",
+        requiresAuth: true,
       },
       components: {
         default: Notes,
@@ -84,6 +85,9 @@ const router = createRouter({
 });
 router.beforeEach((to, from) => {
   console.log("Before Each(Global)");
+  if (to.meta.requiresAuth && !store.getters.isLoggedIn) {
+    return { name: "login" };
+  }
 });
 router.beforeResolve(async (to, from) => {
   console.log("Before Resolve (Global)");
